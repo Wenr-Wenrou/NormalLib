@@ -25,4 +25,8 @@ public class InventoryUtil {
             }
         }
     }
+
+    public static Inventory distinctInventory(Inventory inventory,boolean generate){
+        return new InventorySorter().distinct(generate).sort(inventory);
+    }
 }
