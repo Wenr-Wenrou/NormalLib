@@ -21,20 +21,7 @@ public class InventorySorter {
      * @return 去重ItemStack后的背包
      */
     public InventorySorter distinct(){
-        functions.add(inventory->{
-                    Collection<List<ItemStack>> collection = Arrays.stream(inventory.getContents()).collect(Collectors.groupingBy(ItemStack::getItemMeta)).values();
-                    Collection<ItemStack> newCollection = new ArrayList<>();
-                    for(List<ItemStack> list:collection){
-                        ItemStack is = list.get(0);
-                        is.setAmount(list.stream().map(ItemStack::getAmount).reduce(Integer::sum).get());
-                        newCollection.add(is);
-                    }
-                    inventory.setContents(null);
-                    inventory.addItem(newCollection.toArray(new ItemStack[inventory.getSize()]));
-                    return inventory;
-        }
-        );
-        return this;
+        return distinct(true);
     }
 
     /**
