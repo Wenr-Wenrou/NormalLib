@@ -3,6 +3,8 @@ package com.github.normallib.config;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Consumer;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -80,18 +82,19 @@ public class ConfigManager {
         return file;
     }
 
-        public static void generateAndOperate(String path, String fileName, String suffix, Consumer<FileConfiguration> consumer) {
-            try {
-                File file = new File("plugins/" + path, fileName + "." + suffix);
-                if (!file.exists()) {
-                    file.getParentFile().mkdirs();
-                    file.createNewFile();
-                }
-                FileConfiguration config = YamlConfiguration.loadConfiguration(file);
-                consumer.accept(config);
-                config.save(file);
-            } catch (IOException e) {
-                e.printStackTrace();
+    public static void generateAndOperate(String path, String fileName, String suffix, Consumer<FileConfiguration> consumer) {
+        try {
+            File file = new File("plugins/" + path, fileName + "." + suffix);
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
             }
+            FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+            consumer.accept(config);
+            config.save(file);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
