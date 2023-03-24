@@ -79,4 +79,19 @@ public class ConfigManager {
         }
         return file;
     }
+
+        public static void generateAndOperate(String path, String fileName, String suffix, Consumer<FileConfiguration> consumer) {
+            try {
+                File file = new File("plugins/" + path, fileName + "." + suffix);
+                if (!file.exists()) {
+                    file.getParentFile().mkdirs();
+                    file.createNewFile();
+                }
+                FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+                consumer.accept(config);
+                config.save(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
 }
