@@ -1,0 +1,9 @@
+//TODO:
+1.基础类： 游戏地图，游戏设置，游戏玩家，游戏房间，游戏队伍
+    getter和setter方法
+
+2.管理类:
+    地图管理器:
+        属性: map<Integer, GameMap> maps
+
+    游戏设置管理器:
